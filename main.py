@@ -17,14 +17,15 @@ soup = BeautifulSoup(page_source, "html.parser")
 headlines = soup.find(name="div", class_="latest_stories")
 post_title = headlines.find_all(name="h3", class_="post-title")
 
-news = {}
-links = {}
+topic = []
+links = []
+time_ = []
 for post in post_title:
-    title = post.get_text()
+    title = post.get_text().strip()
     link = post.find_next(name="a")
-    news['Headlines'] = title
-    links['Links'] = link.attrs["href"]
-print(news)
+    topic.append(title)
+    links.append(link.attrs['href'])
+print(topic)
 print(links)
 # with open('news.csv', 'w', newline='') as news:
 #     fieldnames = ['Headlines', 'Links']
